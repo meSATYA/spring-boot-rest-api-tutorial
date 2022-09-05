@@ -22,5 +22,9 @@ jobs:
         java-version: '11'
         distribution: 'temurin'
         cache: maven
+    - name: Docker Compose up
+      run: docker-compose up -d
     - name: Build with Maven
       run: mvn -B package --file pom.xml
+    - name: package docker
+      run: docker build -t argospring .
