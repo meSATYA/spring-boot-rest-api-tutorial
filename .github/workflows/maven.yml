@@ -30,7 +30,7 @@ jobs:
       name: Build & push Docker image
       with:
         image: mesatya/springargodemo
-        tags: v1, latest
+        tags: v2, latest
         registry: docker.io
         dockerfile: Dockerfile
         username: ${{ secrets.DOCKER_USERNAME }}
