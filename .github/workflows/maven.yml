@@ -23,8 +23,8 @@ jobs:
         distribution: 'temurin'
         cache: maven
 
-    - name: Docker Compose up
-      run: docker-compose up -d
+    #- name: Docker Compose up
+    #  run: docker-compose up -d
 
     - name: Build with Maven
       run: mvn -B package --file pom.xml -DskipTests
@@ -36,3 +36,5 @@ jobs:
         tags: v1, latest
         registry: docker.io
         dockerfile: Dockerfile
+	username: ${{ secrets.DOCKER_USERNAME }}
+        password: ${{ secrets.DOCKER_PASSWORD }}
