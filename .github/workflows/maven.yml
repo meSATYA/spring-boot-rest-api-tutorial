@@ -22,9 +22,17 @@ jobs:
         java-version: '11'
         distribution: 'temurin'
         cache: maven
+
     - name: Docker Compose up
-      run: docker-compose -f ../../docker-compose.yml up -d
+      run: docker-compose up -d
+
     - name: Build with Maven
-      run: mvn -B package --file pom.xml
-    - name: package docker
-      run: docker build -t argospring -f ../../Dockerfile .
+      run: mvn -B package --file pom.xml -DskipTests
+
+    - uses: mr-smithers-excellent/docker-build-push@v5
+      name: Build & push Docker image
+      with:
+        image: mesatya/springargodemo
+        tags: v1, latest
+        registry: docker.io
+        dockerfile: Dockerfile
